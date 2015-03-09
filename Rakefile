@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Brk2013::Application.load_tasks
+brk2015::Application.load_tasks

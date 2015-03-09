@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   # GET /registrations
   # GET /registrations.json
+  before_action :set_registration, only: [:show, :edit, :update, :destroy]
+
   def index
     @registrations = Registration.all
 
@@ -40,7 +42,7 @@ class RegistrationsController < ApplicationController
   # POST /registrations
   # POST /registrations.json
   def create
-    @registration = Registration.new(params[:registration])
+    @registration = Registration.new(registration_params)
 
     respond_to do |format|
       if @registration.save
@@ -59,7 +61,7 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
 
     respond_to do |format|
-      if @registration.update_attributes(params[:registration])
+      if @registration.update_attributes(registration_params)
         format.html { redirect_to @registration, notice: 'Registration was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,12 +74,21 @@ class RegistrationsController < ApplicationController
   # DELETE /registrations/1
   # DELETE /registrations/1.json
   def destroy
-    @registration = Registration.find(params[:id])
     @registration.destroy
 
     respond_to do |format|
       format.html { redirect_to registrations_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def set_registration
+    @registration = Registration.find(params[:id])
+  end
+
+  def registration_params
+    params.require(:registration).permit(:user_id, :program_id, :participate)
   end
 end

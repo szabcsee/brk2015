@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  
+  before_action :set_user, only: [ :edit, :update, :destroy]
   before_filter :authorize, only: [:edit, :update, :index]
 
   def index
@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @meal_dates = ["2013-07-08","2013-07-09","2013-07-10","2013-07-11","2013-07-12","2013-07-13","2013-07-14"]
-    @user = User.find(params[:id])
     @user.meals
     @user.programs
     @user.travels
@@ -56,7 +55,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     @meal_dates = ["2013-07-08","2013-07-09","2013-07-10","2013-07-11","2013-07-12","2013-07-13","2013-07-14"]
     @programs = Program.all
     start = DateTime.new(2013,7,10,0,0,0)
@@ -66,7 +65,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         UserMailer.confirmation_email(@user).deliver
-        
+
         format.html { redirect_to @user, notice: t('user_created') }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -79,10 +78,9 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         format.html { redirect_to @User, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -102,6 +100,15 @@ class UsersController < ApplicationController
       format.html { redirect_to Users_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+      params.require(:user).permit(:email_address, :password, :password_confirmation, :first_name, :home_country, :payment, :phone_number, :price_category, :price_method, :reference_number, :second_name)
   end
 
 end

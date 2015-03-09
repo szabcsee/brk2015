@@ -1,4 +1,4 @@
-Brk2013::Application.configure do
+brk2015::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's
@@ -12,7 +12,10 @@ Brk2013::Application.configure do
   config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil
-  config.whiny_nils = true
+  #config.whiny_nils = true
+
+  config.eager_load = false
+
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
