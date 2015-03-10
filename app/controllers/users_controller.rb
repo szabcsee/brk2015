@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.new
     @meal_dates = ["2013-07-08","2013-07-09","2013-07-10","2013-07-11","2013-07-12","2013-07-13","2013-07-14"]
     @child = @user.children.build
-    @meals = @user.meals.build
+    @meal = @user.meals.build
     @travels = @user.travels.build
     @registration = @user.registrations.build
     @programs = Program.all

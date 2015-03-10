@@ -13,7 +13,7 @@ group :production do
     gem 'execjs'
 end
 gem 'nested_form'
-gem 'activeadmin', github: 'activeadmin'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
