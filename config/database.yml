@@ -24,7 +24,7 @@ production:
     adapter: mysql2
     encoding: utf8
     reconnect: false
-    database: brk2015
+    database: BecskeReg2015
     pool: 5
     username: username
     password: password

@@ -1,4 +1,4 @@
-brk2015 (Becske Buddhist course registration)
+BecskeReg2015 (Becske Buddhist course registration)
 ==========================================================
 
 Rails 4 based event registration application with Active Admin, nested forms.

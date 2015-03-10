@@ -1,4 +1,4 @@
-brk2015::Application.routes.draw do
+BecskeReg2015::Application.routes.draw do
 
   get "static_pages/home"
 
